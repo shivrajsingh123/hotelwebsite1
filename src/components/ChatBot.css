@@ -1,0 +1,156 @@
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  background: rgba(37, 99, 235, 0.95);
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.chatbox {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 340px;
+  max-width: calc(100vw - 24px);
+  height: 500px;
+  background: rgba(22, 28, 36, 0.82);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.chatbox-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: center;
+}
+
+.chatbox-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.chatbox-header p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.quick-actions button {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease;
+}
+
+.quick-actions button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  background: transparent;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  max-width: 82%;
+  line-height: 1.45;
+  font-size: 14px;
+  color: white;
+  word-wrap: break-word;
+}
+
+.chat-message.bot {
+  background: rgba(255, 255, 255, 0.12);
+  align-self: flex-start;
+}
+
+.chat-message.user {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  margin-left: auto;
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.chat-input-area input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: white;
+  outline: none;
+}
+
+.chat-input-area input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.chat-input-area button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: white;
+}
+
+.whatsapp-link {
+  text-align: center;
+  text-decoration: none;
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .chatbox {
+    right: 12px;
+    bottom: 74px;
+    width: calc(100vw - 24px);
+    height: 70vh;
+  }
+
+  .chat-toggle {
+    right: 12px;
+    bottom: 14px;
+  }
+}

@@ -7,6 +7,8 @@ import hotel5 from "./assets/hotel5.png";
 import hotel6 from "./assets/hotel6.png";
 import Navbar from "./components/Navbar"; 
 import Hero from "./components/Hero";
+import ChatBot from "./components/ChatBot"; 
+
 
 
 
@@ -95,7 +97,7 @@ function App() {
                 </div>
               </div>
             </div>
-
+             <ChatBot />
             <div className="overflow-hidden rounded-xl border border-slate-200 shadow-sm">
               <img
                 src={hotel1}

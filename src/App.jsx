@@ -8,6 +8,8 @@ import hotel6 from "./assets/hotel6.png";
 import Navbar from "./components/Navbar"; 
 import Hero from "./components/Hero";
 import ChatBot from "./components/ChatBot"; 
+import BookingForm from "./components/BookingForm"
+
 
 
 
@@ -50,12 +52,14 @@ function App() {
   }, []);
 
   return (
-
+      
 
     <div className="min-h-screen bg-slate-100 text-slate-800">
       <Navbar />
-     <Hero />
 
+
+     <Hero />
+     <BookingForm />
       <main className="mx-auto mt-10 max-w-7xl space-y-10 px-6">
 
          

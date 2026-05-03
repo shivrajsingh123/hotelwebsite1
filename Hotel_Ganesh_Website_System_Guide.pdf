@@ -1,0 +1,263 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 13 0 R /F2 14 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 4201 >>
+stream
+BT /F2 9 Tf 85.000 85.000 85.000 rg 54 734 Td (Hotel Ganesh International Website System Guide) Tj ET
+0.82 0.86 0.9 RG 0.6 w 54 717 m 558 717 l S
+BT /F2 23 Tf 0.043 0.122 0.255 rg 54 704 Td (Hotel Ganesh International) Tj ET
+BT /F1 13 Tf 0.275 0.333 0.412 rg 54 673 Td (Website, Booking, Payment, Google Sheets, Reviews, and Map Guide) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 644 Td (This PDF explains the full code setup in simple step-by-step language. It is written so) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 630 Td (you can understand what happens when a guest books a room, pays online, and receives a) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 616 Td (verified confirmation.) Tj ET
+0.925 0.960 1.000 rg 54 540 504 62 re f
+0.55 0.72 0.92 RG 0.8 w 54 540 504 62 re S
+BT /F2 11 Tf 0.078 0.282 0.529 rg 64 598 Td (One-line idea) Tj ET
+BT /F1 10 Tf 0.000 0.000 0.000 rg 64 584 Td (The website is the front desk, the API folder is the hidden staff room,) Tj ET
+BT /F1 10 Tf 0.000 0.000 0.000 rg 64 571 Td (Razorpay collects money, and Google Sheets stores confirmed bookings.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 542 Td (1. Main Parts of the Project) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 519 Td (- Frontend: React pages and components inside src/. This is what visitors see in the) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 505 Td (  browser.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 489 Td (- Backend/API: files inside api/. These run secretly on the server and talk to) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 475 Td (  Razorpay and Google Sheets.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 459 Td (- Environment files: .env stores public frontend settings; api/.env stores private) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 445 Td (  backend secrets.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 429 Td (- External services: Razorpay for payments, Google Sheets for booking records,) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 415 Td (  Google Business/Profile for reviews, Google Maps for location.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 391 Td (2. Important Files) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 368 Td (- src/pages/BookingPage.jsx: Main booking form and Razorpay checkout flow.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 352 Td (- api/create-razorpay-order.js: Creates a Razorpay order after validating booking) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 338 Td (  details.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 322 Td (- api/verify-razorpay-payment.js: Verifies Razorpay signature and saves confirmed) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 308 Td (  booking.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 292 Td (- google-sheets-apps-script.js: Code pasted into Google Sheets Apps Script to append) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 278 Td (  rows.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 262 Td (- src/components/GoogleReviews.jsx: Shows review cards and the Write a Review) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 248 Td (  button.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 232 Td (- src/components/FooterMap.jsx: Shows the Google Map using Barh, Patna, Bihar query.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 216 Td (- vite.config.js: Lets API routes work locally during npm run dev.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 192 Td (3. Booking Flow Like a Child) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 169 Td (- Guest fills name, phone, email, dates, room type, room count, and guests.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 153 Td (- Browser calculates a visible total so the guest can see the price.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 137 Td (- When guest clicks Pay, the browser sends booking details to the backend.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 121 Td (- Backend checks the details again and calculates the real total itself.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 105 Td (- Backend asks Razorpay to create an order for that real total.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 89 Td (- Razorpay gives back an order ID. The browser opens Razorpay checkout.) Tj ET
+BT /F1 9 Tf 0.45 0.45 0.45 rg 516 34 Td (Page 1) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 13 0 R /F2 14 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 3982 >>
+stream
+BT /F2 9 Tf 85.000 85.000 85.000 rg 54 734 Td (Hotel Ganesh International Website System Guide) Tj ET
+0.82 0.86 0.9 RG 0.6 w 54 717 m 558 717 l S
+BT /F2 12 Tf 0.110 0.290 0.510 rg 54 704 Td (Why the backend calculates amount again) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 688 Td (A browser can be edited by a clever user. If the website trusted the browser amount,) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 674 Td (someone could try to pay Rs. 1 for a Rs. 4032 booking. The backend prevents this by) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 660 Td (calculating the amount again.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 634 Td (4. Razorpay Order Creation) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 611 Td (File: api/create-razorpay-order.js) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 593 Td (- Loads RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET from api/.env.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 577 Td (- Checks that the room exists.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 561 Td (- Checks email, phone, dates, guests, and room availability.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 545 Td (- Calculates subtotal, GST, and total.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 529 Td (- Calls Razorpay Orders API and creates an order.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 513 Td (- Returns order ID, amount, currency, receipt, and booking summary to the frontend.) Tj ET
+0.965 0.972 0.985 rg 54 494 504 17 re f
+BT /F1 9.5 Tf 0.098 0.137 0.216 rg 62 497 Td (Example total: 1200 x 3 nights = 3600, GST 12% = 432, total = 4032) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 477 Td (5. Razorpay Payment Verification) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 454 Td (File: api/verify-razorpay-payment.js) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 436 Td (- After payment, Razorpay returns order ID, payment ID, and signature.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 420 Td (- Frontend sends those details to the backend.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 404 Td (- Backend creates its own expected signature using the Razorpay secret.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 388 Td (- If Razorpay signature and backend signature match, the payment is real.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 372 Td (- Only then the website shows Booking Confirmed.) Tj ET
+0.925 0.960 1.000 rg 54 298 504 62 re f
+0.55 0.72 0.92 RG 0.8 w 54 298 504 62 re S
+BT /F2 11 Tf 0.078 0.282 0.529 rg 64 356 Td (Important) Tj ET
+BT /F1 10 Tf 0.000 0.000 0.000 rg 64 342 Td (A bank message means money came in. Signature verification proves that this) Tj ET
+BT /F1 10 Tf 0.000 0.000 0.000 rg 64 329 Td (website booking belongs to that Razorpay payment.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 300 Td (6. Google Sheets Booking Record) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 277 Td (File: google-sheets-apps-script.js) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 259 Td (- You pasted this code into Google Sheets > Extensions > Apps Script.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 243 Td (- You deployed it as a Web App and copied the /exec URL.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 227 Td (- That URL is stored in api/.env as GOOGLE_SHEETS_WEBHOOK_URL.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 211 Td (- After payment verification, the backend posts booking details to that URL.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 195 Td (- Google Apps Script appends a row in the Bookings sheet.) Tj ET
+BT /F2 12 Tf 0.110 0.290 0.510 rg 54 174 Td (Sheet columns) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 158 Td (- Confirmed At) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 142 Td (- Booking Reference) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 126 Td (- Guest Name) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 110 Td (- Phone) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 94 Td (- Email) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 78 Td (- Room) Tj ET
+BT /F1 9 Tf 0.45 0.45 0.45 rg 516 34 Td (Page 2) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 13 0 R /F2 14 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 3709 >>
+stream
+BT /F2 9 Tf 85.000 85.000 85.000 rg 54 734 Td (Hotel Ganesh International Website System Guide) Tj ET
+0.82 0.86 0.9 RG 0.6 w 54 717 m 558 717 l S
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 704 Td (- Check In) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 688 Td (- Check Out) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 672 Td (- Nights) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 656 Td (- Rooms) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 640 Td (- Guests) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 624 Td (- Subtotal) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 608 Td (- GST) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 592 Td (- Total Paid) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 576 Td (- Payment ID) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 560 Td (- Order ID) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 536 Td (7. Environment Files) Tj ET
+BT /F2 12 Tf 0.110 0.290 0.510 rg 54 508 Td (api/.env: private backend values) Tj ET
+0.965 0.972 0.985 rg 54 489 504 17 re f
+BT /F1 9.5 Tf 0.098 0.137 0.216 rg 62 492 Td (RAZORPAY_KEY_ID=rzp_test_or_live_xxxxx) Tj ET
+0.965 0.972 0.985 rg 54 477 504 17 re f
+BT /F1 9.5 Tf 0.098 0.137 0.216 rg 62 480 Td (RAZORPAY_KEY_SECRET=your_secret_key) Tj ET
+0.965 0.972 0.985 rg 54 465 504 17 re f
+BT /F1 9.5 Tf 0.098 0.137 0.216 rg 62 468 Td (GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/.../exec) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 456 Td (Never expose RAZORPAY_KEY_SECRET in frontend files. It belongs only on the) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 442 Td (backend/server.) Tj ET
+BT /F2 12 Tf 0.110 0.290 0.510 rg 54 419 Td (Root .env: public frontend values) Tj ET
+0.965 0.972 0.985 rg 54 400 504 17 re f
+BT /F1 9.5 Tf 0.098 0.137 0.216 rg 62 403 Td (VITE_GOOGLE_REVIEW_URL=https://g.page/r/.../review) Tj ET
+0.965 0.972 0.985 rg 54 388 504 17 re f
+BT /F1 9.5 Tf 0.098 0.137 0.216 rg 62 391 Td (VITE_GOOGLE_MAP_QUERY=Hotel Ganesh International, Barh, Patna, Bihar) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 379 Td (Vite only reads frontend variables from the root .env file. That is why the review link) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 365 Td (needed to be placed outside api/.env.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 339 Td (8. Google Review Button) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 316 Td (File: src/components/GoogleReviews.jsx) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 298 Td (- The section shows review cards.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 282 Td (- The Write a Review button uses VITE_GOOGLE_REVIEW_URL.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 266 Td (- A Google Maps API key is not needed just for the Write a Review button.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 250 Td (- Live Google reviews need Google Maps API key and exact Place ID, but that is) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 236 Td (  optional.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 212 Td (9. Google Map Location) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 189 Td (File: src/components/FooterMap.jsx) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 171 Td (- The map query is set to Hotel Ganesh International, Barh, Patna, Bihar.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 155 Td (- This avoids Google choosing another Hotel Ganesh International in a different) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 141 Td (  state.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 125 Td (- If you use VITE_GOOGLE_PLACE_ID later, make sure it is the exact Barh listing.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 101 Td (10. Local Development Setup) Tj ET
+BT /F1 11 Tf 0.000 0.000 0.000 rg 54 78 Td (File: vite.config.js) Tj ET
+BT /F1 9 Tf 0.45 0.45 0.45 rg 516 34 Td (Page 3) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 13 0 R /F2 14 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 3902 >>
+stream
+BT /F2 9 Tf 85.000 85.000 85.000 rg 54 734 Td (Hotel Ganesh International Website System Guide) Tj ET
+0.82 0.86 0.9 RG 0.6 w 54 717 m 558 717 l S
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 704 Td (- Normally Vite only runs the React frontend.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 688 Td (- I added local middleware so /api/create-razorpay-order and /api/verify-razorpay-) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 674 Td (  payment work during npm run dev.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 658 Td (- After changing .env or vite.config.js, restart npm run dev.) Tj ET
+0.965 0.972 0.985 rg 54 639 504 17 re f
+BT /F1 9.5 Tf 0.098 0.137 0.216 rg 62 642 Td (npm run dev) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 622 Td (11. Speed Improvements) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 599 Td (- Large PNG hotel photos were converted to smaller JPG files.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 583 Td (- Images now lazy-load where possible.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 567 Td (- Google Reviews script is delayed until the review section is near the screen.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 551 Td (- Razorpay checkout script is preloaded on the booking page.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 535 Td (- Build output now shows much smaller image sizes, mostly under 80 KB and the) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 521 Td (  largest around 164 KB.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 497 Td (12. Going Live Checklist) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 474 Td (- Activate Razorpay Live Mode after KYC/business approval.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 458 Td (- Replace test keys with live keys in Vercel environment variables.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 442 Td (- Add GOOGLE_SHEETS_WEBHOOK_URL to Vercel environment variables.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 426 Td (- Add VITE_GOOGLE_REVIEW_URL and VITE_GOOGLE_MAP_QUERY to Vercel environment) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 412 Td (  variables.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 396 Td (- Deploy again after changing environment variables.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 380 Td (- Make one small live payment test.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 364 Td (- Confirm payment appears in Razorpay Dashboard.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 348 Td (- Confirm booking row appears in Google Sheets.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 332 Td (- Confirm map points to Barh, Patna, Bihar.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 316 Td (- Confirm Write a Review button opens your Google Business review page.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 292 Td (13. Common Problems) Tj ET
+BT /F2 12 Tf 0.110 0.290 0.510 rg 54 264 Td (Payment says cannot create order) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 248 Td (- Check RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in api/.env or Vercel env.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 232 Td (- Restart npm run dev after env changes.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 216 Td (- Make sure the backend API route is available.) Tj ET
+BT /F2 12 Tf 0.110 0.290 0.510 rg 54 195 Td (Payment done but not confirmed) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 179 Td (- The server could not verify signature or save to Google Sheets.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 163 Td (- Check Razorpay secret and Google Sheets webhook URL.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 147 Td (- Ask guest for payment ID if needed.) Tj ET
+BT /F2 12 Tf 0.110 0.290 0.510 rg 54 126 Td (Write a Review button missing) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 110 Td (- Put VITE_GOOGLE_REVIEW_URL in root .env, not api/.env.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 94 Td (- Restart npm run dev.) Tj ET
+BT /F1 9 Tf 0.45 0.45 0.45 rg 516 34 Td (Page 4) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 13 0 R /F2 14 0 R >> >> /Contents 12 0 R >>
+endobj
+12 0 obj
+<< /Length 1518 >>
+stream
+BT /F2 9 Tf 85.000 85.000 85.000 rg 54 734 Td (Hotel Ganesh International Website System Guide) Tj ET
+0.82 0.86 0.9 RG 0.6 w 54 717 m 558 717 l S
+BT /F2 12 Tf 0.110 0.290 0.510 rg 54 704 Td (Map shows wrong hotel) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 688 Td (- Use VITE_GOOGLE_MAP_QUERY=Hotel Ganesh International, Barh, Patna, Bihar.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 672 Td (- Do not use a wrong Place ID.) Tj ET
+BT /F2 16 Tf 0.078 0.204 0.361 rg 54 648 Td (14. Final Flow) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 625 Td (- Guest fills booking form.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 609 Td (- Backend creates Razorpay order with safe server amount.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 593 Td (- Guest pays with Razorpay.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 577 Td (- Backend verifies Razorpay signature.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 561 Td (- Backend saves confirmed booking to Google Sheets.) Tj ET
+BT /F1 10.5 Tf 0.000 0.000 0.000 rg 72 545 Td (- Website shows Booking Confirmed.) Tj ET
+0.925 0.960 1.000 rg 54 471 504 62 re f
+0.55 0.72 0.92 RG 0.8 w 54 471 504 62 re S
+BT /F2 11 Tf 0.078 0.282 0.529 rg 64 529 Td (Simple memory trick) Tj ET
+BT /F1 10 Tf 0.000 0.000 0.000 rg 64 515 Td (Frontend shows. Backend protects. Razorpay collects. Google Sheets records.) Tj ET
+BT /F1 10 Tf 0.000 0.000 0.000 rg 64 502 Td (Google Review link grows reputation. Google Map guides guests.) Tj ET
+BT /F1 9 Tf 0.45 0.45 0.45 rg 516 34 Td (Page 5) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+14 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 15
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000146 00000 n 
+0000000284 00000 n 
+0000004537 00000 n 
+0000004675 00000 n 
+0000008709 00000 n 
+0000008847 00000 n 
+0000012608 00000 n 
+0000012747 00000 n 
+0000016702 00000 n 
+0000016842 00000 n 
+0000018413 00000 n 
+0000018484 00000 n 
+trailer
+<< /Size 15 /Root 1 0 R >>
+startxref
+18560
+%%EOF

@@ -41,7 +41,7 @@ export default function ChatBot() {
           text: data.reply || "Sorry, I could not process that."
         }
       ]);
-    } catch (error) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
@@ -64,7 +64,7 @@ export default function ChatBot() {
   return (
     <>
       <button className="chat-toggle" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? "×" : "Chat"}
+        {isOpen ? "Close" : "Chat"}
       </button>
 
       {isOpen && (

@@ -1,356 +1,328 @@
-import { useEffect, useState } from "react";
-import hotel1 from "./assets/hotel1.png";
-import hotel2 from "./assets/hotel2.png";
-import hotel3 from "./assets/hotel3.png";
-import hotel4 from "./assets/hotel4.png";
-import hotel5 from "./assets/hotel5.png"; 
-import hotel6 from "./assets/hotel6.png";
-import Navbar from "./components/Navbar"; 
+import { Route, Routes, useNavigate } from "react-router-dom";
+import hotel1 from "./assets/hotel1.jpg";
+import hotel2 from "./assets/hotel2.jpg";
+import hotel3 from "./assets/hotel3.jpg";
+import hotel4 from "./assets/hotel4.jpg";
+import hotel5 from "./assets/hotel5.jpg";
+import hotel6 from "./assets/hotel6.jpg";
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import ChatBot from "./components/ChatBot"; 
-import BookingForm from "./components/BookingForm"
+import ChatBot from "./components/ChatBot";
+import BookingForm from "./components/BookingForm";
+import FooterMap from "./components/FooterMap";
+import GoogleReviews from "./components/GoogleReviews";
+import BookingPage from "./pages/BookingPage";
+import { rooms } from "./data/rooms";
+import "./App.css";
 
+const amenities = [
+  {
+    title: "Free Wi-Fi",
+    text: "High-speed internet available throughout the hotel.",
+    icon: "wifi",
+    tone: "bg-sky-100 text-sky-700",
+  },
+  {
+    title: "Free Breakfast",
+    text: "Enjoy a complimentary breakfast every morning.",
+    icon: "breakfast",
+    tone: "bg-amber-100 text-amber-700",
+  },
+  {
+    title: "Refrigerator",
+    text: "Every room comes with a personal refrigerator.",
+    icon: "fridge",
+    tone: "bg-cyan-100 text-cyan-700",
+  },
+  {
+    title: "Toiletries",
+    text: "Complimentary toiletries for your convenience.",
+    icon: "toiletries",
+    tone: "bg-emerald-100 text-emerald-700",
+  },
+  {
+    title: "Air-Conditioned Rooms",
+    text: "Stay comfortable with fully air-conditioned rooms.",
+    icon: "ac",
+    tone: "bg-indigo-100 text-indigo-700",
+  },
+  {
+    title: "Parking",
+    text: "Safe and convenient parking available for guests.",
+    icon: "parking",
+    tone: "bg-slate-200 text-slate-700",
+  },
+  {
+    title: "24/7 Reception",
+    text: "Our front desk is available anytime to assist you.",
+    icon: "reception",
+    tone: "bg-rose-100 text-rose-700",
+  },
+  {
+    title: "Room Service",
+    text: "Convenient room service available during your stay.",
+    icon: "service",
+    tone: "bg-lime-100 text-lime-700",
+  },
+];
 
+function AmenityIcon({ type }) {
+  const commonProps = {
+    className: "h-7 w-7",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    viewBox: "0 0 24 24",
+  };
 
+  const icons = {
+    wifi: (
+      <svg {...commonProps}>
+        <path d="M5 12.5a10 10 0 0 1 14 0" />
+        <path d="M8.5 16a5 5 0 0 1 7 0" />
+        <path d="M12 19h.01" />
+      </svg>
+    ),
+    breakfast: (
+      <svg {...commonProps}>
+        <path d="M6 8h10v5a5 5 0 0 1-10 0Z" />
+        <path d="M16 9h2a2 2 0 0 1 0 4h-2" />
+        <path d="M5 20h14" />
+        <path d="M8 4v1" />
+        <path d="M12 4v1" />
+      </svg>
+    ),
+    fridge: (
+      <svg {...commonProps}>
+        <rect x="7" y="3" width="10" height="18" rx="2" />
+        <path d="M7 10h10" />
+        <path d="M10 7h.01" />
+        <path d="M10 14h.01" />
+      </svg>
+    ),
+    toiletries: (
+      <svg {...commonProps}>
+        <path d="M9 6h6" />
+        <path d="M10 6V4h4v2" />
+        <rect x="7" y="8" width="10" height="13" rx="2" />
+        <path d="M10 12h4" />
+        <path d="M10 15h4" />
+      </svg>
+    ),
+    ac: (
+      <svg {...commonProps}>
+        <path d="M12 3v18" />
+        <path d="m8 7 4-4 4 4" />
+        <path d="m8 17 4 4 4-4" />
+        <path d="M3 12h18" />
+        <path d="m7 8-4 4 4 4" />
+        <path d="m17 8 4 4-4 4" />
+      </svg>
+    ),
+    parking: (
+      <svg {...commonProps}>
+        <rect x="4" y="3" width="16" height="18" rx="2" />
+        <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
+      </svg>
+    ),
+    reception: (
+      <svg {...commonProps}>
+        <path d="M4 19h16" />
+        <path d="M6 19v-3a6 6 0 0 1 12 0v3" />
+        <path d="M12 5v3" />
+        <path d="M9 8h6" />
+      </svg>
+    ),
+    service: (
+      <svg {...commonProps}>
+        <path d="M4 18h16" />
+        <path d="M6 18a6 6 0 0 1 12 0" />
+        <path d="M12 7v3" />
+        <path d="M10 7h4" />
+        <path d="M5 21h14" />
+      </svg>
+    ),
+  };
 
+  return icons[type] || icons.service;
+}
 
+function HomePage() {
+  const navigate = useNavigate();
 
-
-
-
-import './App.css'
-
-function App() {
-
-
-  const reviews = [
-    {
-      name: "Rahul Sharma",
-      rating: "★★★★★",
-      text: "Excellent rooms, neat and clean environment, and very polite staff."
-    },
-    {
-      name: "Priya Verma",
-      rating: "★★★★★",
-      text: "Very comfortable stay. The rooms were spacious and the service was great."
-    },
-    {
-      name: "Amit Kumar",
-      rating: "★★★★☆",
-      text: "Good hotel with nice ambience and all basic amenities."
-    }
-  ];
-
-  const [currentReview, setCurrentReview] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentReview((prev) => (prev + 1) % reviews.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const handleBookRoom = (roomId) => {
+    navigate(`/booking?room=${roomId}`);
+  };
 
   return (
-      
-
     <div className="min-h-screen bg-slate-100 text-slate-800">
       <Navbar />
+      <Hero />
+      <BookingForm />
 
-
-     <Hero />
-     <BookingForm />
       <main className="mx-auto mt-10 max-w-7xl space-y-10 px-6">
-
-         
-        
-
-        
-
-        <section id="rooms" className="rounded-2xl bg-white p-8 shadow-md">
-  <h3 className="mb-8 text-center text-3xl font-bold text-slate-900">
-    Our Rooms
-  </h3>
+        <section id="rooms" className="rounded-lg bg-white p-8 shadow-md">
+          <h3 className="mb-8 text-center text-3xl font-bold text-slate-900">
+            Our Rooms
+          </h3>
 
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="overflow-hidden rounded-xl border border-slate-200 shadow-sm">
-              <img
-                src={hotel2}
-                alt="Single Room"
-                className="h-52 w-full object-cover"
-              />
+            {rooms.map((room) => (
+              <article
+                key={room.id}
+                className="overflow-hidden rounded-lg border border-slate-200 shadow-sm"
+              >
+                <img
+                  src={room.image}
+                  alt={room.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-52 w-full object-cover"
+                />
 
-              <div className="p-4">
-                <h4 className="text-xl font-semibold text-slate-900">
-                  Single Room
-                </h4>
+                <div className="p-4">
+                  <h4 className="text-xl font-semibold text-slate-900">
+                    {room.name}
+                  </h4>
 
-                <p className="mt-2 text-sm text-slate-600">
-                  Comfortable room with modern amenities and a relaxing
-                  atmosphere.
-                </p>
+                  <p className="mt-2 text-sm text-slate-600">
+                    {room.description}
+                  </p>
 
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-lg font-bold text-blue-600">
-                    ₹1200 / night
-                  </span>
+                  <p className="mt-3 text-sm text-slate-500">
+                    Up to {room.maxGuests} guests | {room.availableRooms} rooms left
+                  </p>
 
-                  <button className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                    Book
-                  </button>
+                  <div className="mt-4 flex items-center justify-between gap-4">
+                    <span className="text-lg font-bold text-blue-600">
+                      Rs. {room.price} / night
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={() => handleBookRoom(room.id)}
+                      className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+                    >
+                      Book
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </div>
-             <ChatBot />
-            <div className="overflow-hidden rounded-xl border border-slate-200 shadow-sm">
-              <img
-                src={hotel1}
-                alt="Executive Room"
-                className="h-52 w-full object-cover"
-              />
-
-              <div className="p-4">
-                <h4 className="text-xl font-semibold text-slate-900">
-                  Executive Room
-                </h4>
-
-                <p className="mt-2 text-sm text-slate-600">
-                  Spacious room designed for business travelers and families.
-                </p>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-lg font-bold text-blue-600">
-                    ₹2000 / night
-                  </span>
-
-                  <button className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                    Book
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-xl border border-slate-200 shadow-sm">
-              <img
-                src={hotel3}
-                alt="Luxury Suite"
-                className="h-52 w-full object-cover"
-              />
-
-              <div className="p-4">
-                <h4 className="text-xl font-semibold text-slate-900">
-                  Luxury Suite
-                </h4>
-
-                <p className="mt-2 text-sm text-slate-600">
-                  Premium suite offering elegance, comfort, and extra space.
-                </p>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-lg font-bold text-blue-600">
-                    ₹2600 / night
-                  </span>
-
-                  <button className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                    Book
-                  </button>
-                </div>
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section className="rounded-2xl bg-white p-8 shadow-md">
-  <h3 className="text-center text-3xl font-bold text-slate-900">
-    Hotel Amenities
-  </h3>
+        <section id="amenities" className="rounded-lg bg-white p-8 shadow-md">
+          <h3 className="text-center text-3xl font-bold text-slate-900">
+            Hotel Amenities
+          </h3>
 
-  <p className="mx-auto mt-3 max-w-2xl text-center text-slate-600">
-    We provide everything you need for a comfortable and relaxing stay.
-  </p>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-slate-600">
+            We provide everything you need for a comfortable and relaxing stay.
+          </p>
 
-  <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-      <div className="text-4xl">📶</div>
-      <h4 className="mt-4 text-xl font-semibold">Free Wi-Fi</h4>
-      <p className="mt-2 text-sm text-slate-600">
-        High-speed internet available throughout the hotel.
-      </p>
-    </div>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {amenities.map((amenity) => (
+              <div
+                key={amenity.title}
+                className="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              >
+                <div
+                  className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full ${amenity.tone}`}
+                >
+                  <AmenityIcon type={amenity.icon} />
+                </div>
+                <h4 className="mt-4 text-xl font-semibold">{amenity.title}</h4>
+                <p className="mt-2 text-sm text-slate-600">{amenity.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-      <div className="text-4xl">🍳</div>
-      <h4 className="mt-4 text-xl font-semibold">Free Breakfast</h4>
-      <p className="mt-2 text-sm text-slate-600">
-        Enjoy a complimentary breakfast every morning.
-      </p>
-    </div>
+        <section id="gallery" className="rounded-lg bg-white p-8 shadow-md">
+          <h3 className="text-center text-3xl font-bold text-slate-900">
+            Our Gallery
+          </h3>
 
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-      <div className="text-4xl">🧊</div>
-      <h4 className="mt-4 text-xl font-semibold">Refrigerator</h4>
-      <p className="mt-2 text-sm text-slate-600">
-        Every room comes with a personal refrigerator.
-      </p>
-    </div>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-slate-600">
+            Take a look at our rooms, interiors, and welcoming spaces designed
+            to make your stay comfortable and memorable.
+          </p>
 
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-      <div className="text-4xl">🧴</div>
-      <h4 className="mt-4 text-xl font-semibold">Toiletries</h4>
-      <p className="mt-2 text-sm text-slate-600">
-        Complimentary toiletries for your convenience.
-      </p>
-    </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3 md:grid-rows-2">
+            <div className="md:col-span-2 md:row-span-2">
+              <img
+                src={hotel1}
+                alt="Hotel main view"
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full rounded-lg object-cover"
+              />
+            </div>
 
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-      <div className="text-4xl">❄️</div>
-      <h4 className="mt-4 text-xl font-semibold">Air-Conditioned Rooms</h4>
-      <p className="mt-2 text-sm text-slate-600">
-        Stay comfortable with fully air-conditioned rooms.
-      </p>
-    </div>
+            {[hotel2, hotel3, hotel4, hotel5, hotel6].map((image, index) => (
+              <div key={image}>
+                <img
+                  src={image}
+                  alt={`Hotel gallery ${index + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full rounded-lg object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
 
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-      <div className="text-4xl">🚗</div>
-      <h4 className="mt-4 text-xl font-semibold">Parking</h4>
-      <p className="mt-2 text-sm text-slate-600">
-        Safe and convenient parking available for guests.
-      </p>
-    </div>
-
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-      <div className="text-4xl">🛎️</div>
-      <h4 className="mt-4 text-xl font-semibold">24/7 Reception</h4>
-      <p className="mt-2 text-sm text-slate-600">
-        Our front desk is available anytime to assist you.
-      </p>
-    </div>
-
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
-      <div className="text-4xl">🍽️</div>
-      <h4 className="mt-4 text-xl font-semibold">Room Service</h4>
-      <p className="mt-2 text-sm text-slate-600">
-        Convenient room service available during your stay.
-      </p>
-    </div>
-  </div>
-</section>
-
-        <section className="rounded-2xl bg-white p-8 shadow-md">
-  <h3 className="text-center text-3xl font-bold text-slate-900">
-    Our Gallery
-  </h3>
-
-  <p className="mx-auto mt-3 max-w-2xl text-center text-slate-600">
-    Take a look at our rooms, interiors, and welcoming spaces designed to make
-    your stay comfortable and memorable.
-  </p>
-
-  <div className="mt-8 grid gap-4 md:grid-cols-3 md:grid-rows-2">
-    <div className="md:col-span-2 md:row-span-2">
-      <img
-        src={hotel1}
-        alt="Hotel main view"
-        className="h-full w-full rounded-2xl object-cover"
-      />
-    </div>
-
-    <div>
-      <img
-        src={hotel2}
-        alt="Hotel room"
-        className="h-full w-full rounded-2xl object-cover"
-      />
-    </div>
-
-    <div>
-      <img
-        src={hotel3}
-        alt="Hotel interior"
-        className="h-full w-full rounded-2xl object-cover"
-      />
-    </div>
-
-    <div>
-      <img
-        src={hotel4}
-        alt="Hotel amenities"
-        className="h-full w-full rounded-2xl object-cover"
-      />
-    </div>
-
-    <div>
-      <img
-        src={hotel5}
-        alt="Hotel stay"
-        className="h-full w-full rounded-2xl object-cover"
-      />
-    </div>
-
-  <div>
-      <img
-        src={hotel6}
-        alt="Hotel stay"
-        className="h-full w-full rounded-2xl object-cover"
-      />
-    </div>
-
-  </div>
-</section>
-<section className="rounded-xl bg-white p-10 text-center shadow-md">
-  <h2 className="mb-6 text-3xl font-bold text-slate-800">Guest Reviews</h2>
-
-  <div className="mx-auto max-w-3xl rounded-2xl bg-slate-50 p-8 transition-all duration-500">
-    <p className="mb-4 text-lg leading-8 text-slate-600">
-      "{reviews[currentReview].text}"
-    </p>
-
-    <h3 className="text-xl font-semibold text-slate-800">
-      {reviews[currentReview].name}
-    </h3>
-
-    <p className="mt-2 text-yellow-500 text-lg">
-      {reviews[currentReview].rating}
-    </p>
-  </div>
-
-  <div className="mt-6 flex justify-center gap-2">
-    {reviews.map((_, index) => (
-      <button
-        key={index}
-        onClick={() => setCurrentReview(index)}
-        className={`h-3 w-3 rounded-full ${
-          currentReview === index ? "bg-slate-800" : "bg-slate-300"
-        }`}
-      ></button>
-    ))}
-  </div>
-
-</section>
-
+        <GoogleReviews />
       </main>
-<footer className="mt-6 bg-slate-900 text-white">
-  <div className="max-w-7xl mx-auto px-6 py-8 text-center">
 
-    <h2 className="text-lg font-semibold mb-2">
-      Hotel Ganesh International
-    </h2>
+      <ChatBot />
 
-    <p className="text-sm text-gray-300 mb-3">
-      Comfortable stay with modern amenities, free WiFi, breakfast, and excellent hospitality.
-    </p>
+      <footer id="contact" className="mt-6 bg-slate-900 text-white">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-10 lg:grid-cols-[1fr_1.2fr]">
+          <div>
+            <h2 className="text-2xl font-semibold">
+              Hotel Ganesh International
+            </h2>
 
-    <p className="text-sm text-gray-400">
-      © {new Date().getFullYear()} Hotel Ganesh International. All rights reserved.
-    </p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-gray-300">
+              Comfortable stay with modern amenities, free WiFi, breakfast, and
+              excellent hospitality.
+            </p>
 
-    <p className="text-xs text-gray-500 mt-2">
-      Site developed by <span className="font-semibold text-gray-300">Shiv Singh</span>
-    </p>
+            <div className="mt-6 space-y-2 text-sm text-gray-300">
+              <p>Booking: +91 82929 80491</p>
+              <p>Payments: UPI, cards, net banking, and wallets via Razorpay</p>
+              <p>Location: Find us on Google Maps</p>
+            </div>
 
-  </div>
-</footer>
+            <p className="mt-8 text-sm text-gray-400">
+              Copyright {new Date().getFullYear()} Hotel Ganesh International.
+              All rights reserved.
+            </p>
+
+            <p className="mt-2 text-xs text-gray-500">
+              Site developed by{" "}
+              <span className="font-semibold text-gray-300">Shiv Singh</span>
+            </p>
+          </div>
+
+          <FooterMap />
+        </div>
+      </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/booking" element={<BookingPage />} />
+    </Routes>
   );
 }
 

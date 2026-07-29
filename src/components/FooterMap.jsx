@@ -4,13 +4,14 @@ function FooterMap() {
   const hotelQuery =
     import.meta.env.VITE_GOOGLE_MAP_QUERY ||
     "Hotel Ganesh International, Barh, Patna, Bihar";
+  const coordinates =
+    import.meta.env.VITE_GOOGLE_MAP_COORDINATES || "25.476061,85.705854";
 
-  const mapUrl =
-    apiKey && placeId
+  const mapUrl = coordinates
+    ? `https://www.google.com/maps?q=${encodeURIComponent(coordinates)}&output=embed`
+    : apiKey && placeId
       ? `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=place_id:${placeId}`
-      : `https://www.google.com/maps?q=${encodeURIComponent(
-          hotelQuery,
-        )}&output=embed`;
+      : `https://www.google.com/maps?q=${encodeURIComponent(hotelQuery)}&output=embed`;
 
   return (
     <div className="overflow-hidden rounded-lg border border-slate-700 bg-slate-800">
